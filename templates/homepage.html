@@ -2,105 +2,83 @@
 
 {% block content %}
 
-<h1>GameRank's Best of the Month</h1>
+<h1>GameRank's Best of the Year</h1>
 
 <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-        <div class="container">
-          <div class="carousel-caption text-start">
-            <h1>Example headline.</h1>
-            <p class="opacity-75">Some representative placeholder content for the first slide of the carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-        <div class="container">
-          <div class="carousel-caption">
-            <h1>Another example headline.</h1>
-            <p>Some representative placeholder content for the second slide of the carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-        <div class="container">
-          <div class="carousel-caption text-end">
-            <h1>One more for good measure.</h1>
-            <p>Some representative placeholder content for the third slide of this carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+  <div class="carousel-indicators">
+    <li id="bestGOY1" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
+    <li id="bestGOY2" data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
+    <li id="bestGOY3" data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+    <!-- {% set idx = 0 %}
+    {% for top_game in top_games %}
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ idx }}" {% if idx == 0 %}class="active"{% endif %} aria-label="Slide {{ idx + 1 }}"></button>
+    {% set idx = idx + 1 %}
+    {% endfor %} -->
   </div>
-
-<h1>GameRank's Worst of the Month</h1>
-
-<div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-        <div class="container">
-          <div class="carousel-caption text-start">
-            <h1>Example headline.</h1>
-            <p class="opacity-75">Some representative placeholder content for the first slide of the carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-        <div class="container">
-          <div class="carousel-caption">
-            <h1>Another example headline.</h1>
-            <p>Some representative placeholder content for the second slide of the carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-        <div class="container">
-          <div class="carousel-caption text-end">
-            <h1>One more for good measure.</h1>
-            <p>Some representative placeholder content for the third slide of this carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
-          </div>
+  <div class="carousel-inner">
+    {% for top_game in top_games %}
+    <div class="carousel-item {% if loop.first %}active{% endif %}">
+      <img id="gameImage" src="{{ top_game.game_image }}" alt="{{ top_game.game_title }}" class="img-fluid">
+      <div class="container">
+        <div class="carousel-caption text-start">
+          <h1 id="GOYtitle">{{ top_game.game_title }}</h1>
+          <p id="GameRankScore" class="opacity-75">|| GameRank Score: {{ top_game.gamerank_score }} ||</p>
+          <p id="otherScores" class="opacity-75">|| Meta Score: {{ top_game.metascore }} || User Score: {{ top_game.user_score }} ||</p>
+          <!-- <p class="opacity-75">User Score: {{ top_game.user_score }}</p> -->
+          <p><a id="gameInfo" class="btn btn-lg" href="#">Game Info</a></p>
         </div>
       </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+    {% endfor %}
   </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<h1>GameRank's Worst of the Year</h1>
+
+<div id="myCarousel2" class="carousel slide mb-6" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <li id="worstGOY1" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
+    <li id="worstGOY2" data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
+    <li id="worstGOY3"data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+    <!-- {% set idx = 0 %}
+    {% for bottom_game in bottom_games %}
+    <button type="button" data-bs-target="#myCarousel2" data-bs-slide-to="{{ idx }}" {% if idx == 0 %}class="active"{% endif %} aria-label="Slide {{ idx + 1 }}"></button>
+    {% set idx = idx + 1 %}
+    {% endfor %} -->
+  </div>
+  <div class="carousel-inner">
+    {% for bottom_game in bottom_games %}
+    <div class="carousel-item {% if loop.first %}active{% endif %}">
+      <img id="gameImage" src="{{ bottom_game.game_image }}" alt="{{ bottom_game.game_title }}" class="img-fluid">
+      <div class="container">
+        <div class="carousel-caption text-start">
+          <h1 id="GOYtitle">{{ bottom_game.game_title }}</h1>
+          <p id="GameRankScore" class="opacity-75">|| GameRank Score: {{ bottom_game.gamerank_score }} ||</p>
+          <p id="otherScores" class="opacity-75">|| Meta Score: {{ bottom_game.metascore }} || User Score: {{ bottom_game.user_score }} ||</p>
+          <!-- <p class="opacity-75">User Score: {{ bottom_game.user_score }}</p> -->
+          <p><a id="gameInfo" class="btn btn-lg" href="#">Game Info</a></p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel2" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel2" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 
 
 {% endblock %}

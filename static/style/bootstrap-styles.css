@@ -59,22 +59,6 @@ color: blueviolet;
     color: black;
   }
 
-  /* Carousel base class */
-  .carousel {
-    /* margin-top: 4rem; */
-    margin-bottom: 1rem;
-  }
-  /* Since positioning the image, we need to help out the caption */
-  .carousel-caption {
-    bottom: 3rem;
-    z-index: 10;
-  }
-  
-  /* Declare heights because of positioning of img element */
-  .carousel-item {
-    height: 32rem;
-  }
-  
   body {
     border-bottom: 50px solid blueviolet;
     background-color:whitesmoke;
@@ -86,6 +70,7 @@ color: blueviolet;
   #navSearchBar {
     width: 300px;
   }
+
 
 /* Style the table */
 table {
@@ -108,4 +93,78 @@ td {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+}
+
+  /* Carousel base class */
+  .carousel {
+    /* margin-top: 4rem; */
+    margin-bottom: 1rem;
+  }
+  /* Since positioning the image, we need to help out the caption */
+  .carousel-caption {
+    top: 8rem;
+    z-index: 10;
+    text-align: center;
+  }
+
+  #gameImage {
+    margin-top: 2rem;
+    margin-left: 2rem;
+    width: 10%;
+  }
+
+  #GameRankScore {
+    font-size: 35px;
+    text-align: center;
+  }
+
+  #GOYtitle {
+    font-size: 50px;
+    text-align: center;
+  }
+
+  #otherScores {
+    text-align: center;
+  }
+
+  #gameInfo {
+    background-color: white;
+    color: blueviolet;
+  }
+  
+  /* Declare heights because of positioning of img element */
+  .carousel-item {
+    height: 32rem;
+  }
+
+#myCarousel {
+  background-color: blueviolet;
+}
+
+#myCarousel2 {
+  background-color: blueviolet;
+}
+
+#bestGOY1 {
+  background-color: gold;
+}
+
+#bestGOY2 {
+  background-color: silver;
+}
+
+#bestGOY3 {
+  background-color: brown;
+}
+
+#worstGOY1 {
+  background-color: gold;
+}
+
+#worstGOY2 {
+  background-color: silver;
+}
+
+#worstGOY3 {
+  background-color: brown;
 }
