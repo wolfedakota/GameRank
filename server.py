@@ -35,9 +35,64 @@ def index():
 
 @app.route('/PopularFranchises')
 def popular_franchises():
-    """A page containing a list of the top gaming franchises"""
+    """A page containing data regarding the top gaming franchises"""
 
     return render_template("popularFranchises.html")
+
+@app.route('/PopularPlatforms')
+def popular_platforms():
+    "A page containing data specific to a popular platform"
+
+    return render_template("popularPlatforms.html")
+
+@app.route('/3DS')
+def popular_franchises_3DS():
+    "A page containing all of the 3DS game data"
+    session = Session()
+
+    allGames = session.query(Game) \
+    .order_by(desc(Game.gamerank_score)) \
+    .all()
+
+    threeDS_games = session.query(Game) \
+    .join(Platform) \
+    .filter(Platform.name == '3DS') \
+    .all()
+
+    gamePlatforms = session.query(Platform) \
+    .all()
+    
+    gameGenres = session.query(Genre) \
+    .group_by(Genre.name) \
+    .all()
+
+    for i, game in enumerate(allGames, start=1):
+        game.gamerank = i
+
+    
+
+    return render_template("popularPlatforms3DS.html", threeDS_games=threeDS_games, gamePlatforms=gamePlatforms, gameGenres=gameGenres)
+
+@app.route('/completeDatabase')
+def complete_database():
+    "A page containing the entire games table"
+    session = Session()
+
+    allGames = session.query(Game) \
+    .order_by(desc(Game.gamerank_score)) \
+    .all()
+
+    gamePlatforms = session.query(Platform) \
+    .all()
+    
+    gameGenres = session.query(Genre) \
+        .group_by(Genre.name) \
+        .all()
+
+    for i, game in enumerate(allGames, start=1):
+        game.gamerank = i
+
+    return render_template("completeDatabase.html", allGames=allGames, gamePlatforms=gamePlatforms, gameGenres=gameGenres)
 
 @app.route('/BestGames')
 def best_games():
@@ -54,8 +109,31 @@ def worst_games():
 @app.route('/ComparisonTool')
 def comparison_tool():
     """A page containing a tool for comparing games"""
+    session = Session()
 
-    return render_template("comparisonTool.html")
+    tableGames = session.query(Game) \
+        .order_by(desc(Game.gamerank_score)) \
+        .all()
+    
+    for i, game in enumerate(tableGames, start=1):
+        game.gamerank = i
+    
+    # rightTableGames = session.query(Game) \
+    #     .order_by(desc(Game.metascore)) \
+    #     .all()
+
+    gamePlatforms = session.query(Platform) \
+        .all()
+    
+    gameGenres = session.query(Genre) \
+        .group_by(Genre.name) \
+        .all()
+    
+    gameDecades = session.query(Decade) \
+        .all()
+
+
+    return render_template("comparisonTool.html", tableGames=tableGames, gamePlatforms=gamePlatforms, gameGenres=gameGenres, gameDecades=gameDecades)
 
 @app.route('/Profile')
 def profile():

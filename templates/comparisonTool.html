@@ -2,6 +2,404 @@
 
 {% block content %}
 
+<h1>GameRank Comparison Tool</h1>
+
+<!-- <div id="comparisonToolSubHeaders">
+    <h5 id="comparisonToolSubHeader">Use the tables below to compare two sets of data.</h5>
+    <h6 id="comparisonToolSubHeader">For example: Best PlayStation games by GameRank score vs best Xbox games by GameRank score.</h6>
+</div> -->
 
 
+<div id="filters">
+    <div id="LTfilters">
+        <label for="LTdecadeFilter">Filter by Decade:</label>
+        <select id="LTdecadeFilter">
+            <option value="All">All</option>
+            {% for decade in gameDecades %}
+                <option value="{{ decade.name }}">{{ decade.name }}</option>
+            {% endfor %}
+        </select>
+        <label for="LTplatformFilter">Filter by Platform:</label>
+        <select id="LTplatformFilter">
+            <option value="All">All</option>
+            {% for platform in gamePlatforms %}
+                <option value="{{ platform.name }}">{{ platform.name }}</option>
+            {% endfor %}
+        </select>
+        <label for="LTgenreFilter">Filter by Genre:</label>
+        <select id="LTgenreFilter">
+            <option value="All">All</option>
+            {% for genre in gameGenres %}
+                <option value="{{ genre.name }}">{{ genre.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div id="RTfilters">
+        <label for="RTdecadeFilter">Filter by Decade:</label>
+        <select id="RTdecadeFilter">
+            <option value="All">All</option>
+            {% for decade in gameDecades %}
+                <option value="{{ decade.name }}">{{ decade.name }}</option>
+            {% endfor %}
+        </select>
+        <label for="RTplatformFilter">Filter by Platform:</label>
+        <select id="RTplatformFilter">
+            <option value="All">All</option>
+            {% for platform in gamePlatforms %}
+                <option value="{{ platform.name }}">{{ platform.name }}</option>
+            {% endfor %}
+        </select>
+        <label for="RTgenreFilter">Filter by Genre:</label>
+        <select id="RTgenreFilter">
+            <option value="All">All</option>
+            {% for genre in gameGenres %}
+                <option value="{{ genre.name }}">{{ genre.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+
+<div id="tables"> 
+    <table id="leftTable" border="1">
+        <thead>
+            <tr>
+                <th><button id="LTsortGameRank">GameRank</button></th>
+                <th>Title</th>
+                <th>Release Date</th>
+                <th>Platform</th>
+                <th><button id="LTsortMetaScore">Meta Score</button></th>
+                <th><button id="LTsortUserScore">User Score</button></th>
+                <th><button id="LTsortGameRankScore">GameRank Score</button></th>
+            </tr>
+        </thead>
+        <tbody id="leftTableBody">
+            {% for game in tableGames %}
+                    <tr class="left-game-row" data-platform="{{ game.platform.name }}"  data-genre="{% for genre in game.genres %}{{ genre.name }}{% if not loop.last %}, {% endif %}{% endfor %}"  data-decade="{{ game.decade.name }}">
+                <td>{{ game.gamerank }}</td>
+                <td>{{ game.game_title }}</td>
+                <td>{{ game.release_date }}</td>
+                <td>{{ game.platform.name }}</td>
+                <td>{{ game.metascore }}</td>
+                <td>{{ game.user_score }}</td>
+                <td>{{ game.gamerank_score }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table id="rightTable" border="1">          
+        <thead>
+            <tr>
+                <th><button id="RTsortGameRank">GameRank</button></th>
+                <th>Title</th>
+                <th>Release Date</th>
+                <th>Platform</th>
+                <th><button id="RTsortMetaScore">Meta Score</button></th>
+                <th><button id="RTsortUserScore">User Score</button></th>
+                <th><button id="RTsortGameRankScore">GameRank Score</button></th>
+            </tr>
+        </thead>
+        <tbody id="rightTableBody">
+            {% for game in tableGames %}
+                    <tr class="right-game-row" data-platform="{{ game.platform.name }}" data-genre="{% for genre in game.genres %}{{ genre.name }}{% if not loop.last %}, {% endif %}{% endfor %}" data-decade="{{ game.decade.name }}">
+                <td>{{ game.gamerank }}</td>
+                <td>{{ game.game_title }}</td>
+                <td>{{ game.release_date }}</td>
+                <td>{{ game.platform.name }}</td>
+                <td>{{ game.metascore }}</td>
+                <td>{{ game.user_score }}</td>
+                <td>{{ game.gamerank_score }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+  // Variables to keep track of sorting state
+    let LTGameRankSortOrder = 0;
+    let LTmetaScoreSortOrder = 0;
+    let LTuserScoreSortOrder = 0;
+    let LTgameRankScoreSortOrder = 0;
+
+    let RTGameRankSortOrder = 0;
+    let RTmetaScoreSortOrder = 0;
+    let RTuserScoreSortOrder = 0;
+    let RTgameRankScoreSortOrder = 0;
+
+    // Get references to the tables and buttons
+    const leftTable = document.getElementById("leftTable");
+    const rightTable = document.getElementById("rightTable");
+
+    const LTsortGameRankButton = document.getElementById("LTsortGameRank")
+    const LTsortMetaScoreButton = document.getElementById("LTsortMetaScore");
+    const LTsortUserScoreButton = document.getElementById("LTsortUserScore");
+    const LTsortGameRankScoreButton = document.getElementById("LTsortGameRankScore");
+
+    const RTsortGameRankButton = document.getElementById("RTsortGameRank")
+    const RTsortMetaScoreButton = document.getElementById("RTsortMetaScore");
+    const RTsortUserScoreButton = document.getElementById("RTsortUserScore");
+    const RTsortGameRankScoreButton = document.getElementById("RTsortGameRankScore");
+
+    // Function to sort a table column
+    function sortLeftTable(table, column, sortOrder) {
+        console.log(table);
+        console.log(column);
+        console.log(sortOrder);
+        const tbody = table.querySelector("tbody");
+        console.log(tbody);
+        const rows = Array.from(tbody.querySelectorAll("tr.left-game-row"));
+        console.log(rows);
+
+        // Sort the rows based on the content of the specified column
+        rows.sort((rowA, rowB) => {
+            console.log("a:", rowA);
+            console.log("b:", rowB);
+            const aValue = parseInt(rowA.cells[column].textContent.trim(), 10);
+            const bValue = parseInt(rowB.cells[column].textContent.trim(), 10);
+
+            return sortOrder === 1 ? bValue - aValue : aValue - bValue;
+
+        });
+
+        // Remove existing rows from the table
+        tbody.innerHTML = "";
+
+        // Append the sorted rows back to the table
+        rows.forEach((row) => {
+            tbody.appendChild(row);
+        });
+    }
+
+    function sortRightTable(table, column, sortOrder) {
+        console.log(table)
+        console.log(column)
+        console.log(sortOrder)
+        const tbody = table.querySelector("tbody");
+        console.log(tbody)
+        const rows = Array.from(tbody.querySelectorAll("tr.right-game-row"));
+        console.log(rows)
+
+        // Sort the rows based on the content of the specified column
+        rows.sort((rowA, rowB) => {
+            const aValue = parseInt(rowA.cells[column].textContent.trim(), 10);
+            const bValue = parseInt(rowB.cells[column].textContent.trim(), 10);
+
+            return sortOrder === 1 ? bValue - aValue : aValue - bValue;
+        });
+
+        // Remove existing rows from the table
+        tbody.innerHTML = "";
+
+        // Append the sorted rows back to the table
+        rows.forEach((row) => {
+            tbody.appendChild(row);
+        });
+    }
+
+    LTsortGameRankButton.addEventListener("click", () => {
+        LTGameRankSortOrder = (LTGameRankSortOrder + 1) % 2; 
+        sortLeftTable(leftTable, 0, LTGameRankSortOrder);
+
+        // LTuserScoreSortOrder = -1;
+        // LTgameRankScoreSortOrder = -1;
+        // LTmetaScoreSortOrder = -1;
+        
+        // // Reset button text based on the sorting state
+        // if (LTGameRankSortOrder === 0) {
+        //     LTsortGameRankButton.innerText = "GameRank \n ▼";
+        // } else if (LTGameRankSortOrder === 1) {
+        //     LTsortGameRankButton.innerText = "GameRank \n ▲";
+        // } else {
+        //     LTsortGameRankButton.innerText = "GameRank";
+        // }  
+
+    });
+
+    // Event listener for sorting Meta Score
+    LTsortMetaScoreButton.addEventListener("click", () => {
+        LTmetaScoreSortOrder = (LTmetaScoreSortOrder + 1) % 2; 
+        sortLeftTable(leftTable, 4, LTmetaScoreSortOrder); 
+    });
+
+    // Event listener for sorting User Score
+    LTsortUserScoreButton.addEventListener("click", () => {
+        LTuserScoreSortOrder = (LTuserScoreSortOrder + 1) % 2; 
+        sortLeftTable(leftTable, 5, LTuserScoreSortOrder);
+        // sortTable(rightTable, 5, LTuserScoreSortOrder);
+    });
+
+    // Event listener for sorting GameRank Score
+    LTsortGameRankScoreButton.addEventListener("click", () => {
+        LTgameRankScoreSortOrder = (LTgameRankScoreSortOrder + 1) % 2; 
+        sortLeftTable(leftTable, 6, LTgameRankScoreSortOrder);
+        // sortTable(rightTable, 6, LTgameRankScoreSortOrder);
+    });
+
+    RTsortGameRankButton.addEventListener("click", () => {
+        RTGameRankSortOrder = (RTGameRankSortOrder + 1) % 2; 
+        sortRightTable(rightTable, 0, RTGameRankSortOrder);
+    });
+
+        // Event listener for sorting Meta Score
+    RTsortMetaScoreButton.addEventListener("click", () => {
+        RTmetaScoreSortOrder = (RTmetaScoreSortOrder + 1) % 2; 
+        // sortTable(leftTable, 4, RTmetaScoreSortOrder);
+        sortRightTable(rightTable, 4, RTmetaScoreSortOrder);
+    });
+
+    // Event listener for sorting User Score
+    RTsortUserScoreButton.addEventListener("click", () => {
+        RTuserScoreSortOrder = (RTuserScoreSortOrder + 1) % 2; 
+        // sortTable(leftTable, 5, RTuserScoreSortOrder);
+        sortRightTable(rightTable, 5, RTuserScoreSortOrder);
+    });
+
+    // Event listener for sorting GameRank Score
+    RTsortGameRankScoreButton.addEventListener("click", () => {
+        RTgameRankScoreSortOrder = (RTgameRankScoreSortOrder + 1) % 2; 
+        // sortTable(leftTable, 6, RTgameRankScoreSortOrder);
+        sortRightTable(rightTable, 6, RTgameRankScoreSortOrder);
+    });
+</script>
+
+<script>
+
+    const LTplatformFilter = document.getElementById("LTplatformFilter");
+    const LTgenreFilter = document.getElementById("LTgenreFilter");
+    const LTdecadeFilter = document.getElementById("LTdecadeFilter");
+
+    const RTplatformFilter = document.getElementById("RTplatformFilter");
+    const RTgenreFilter = document.getElementById("RTgenreFilter");
+    const RTdecadeFilter = document.getElementById("RTdecadeFilter");
+
+    const leftGameRows = document.querySelectorAll(".left-game-row");
+    const rightGameRows = document.querySelectorAll(".right-game-row");
+
+    LTplatformFilter.addEventListener("change", leftFilterByPlatform);
+    LTgenreFilter.addEventListener("change", leftFilterByGenre);
+    LTdecadeFilter.addEventListener("change", leftFilterByDecade);
+
+    RTplatformFilter.addEventListener("change", rightFilterByPlatform);
+    RTgenreFilter.addEventListener("change", rightFilterByGenre);
+    RTdecadeFilter.addEventListener("change", rightFilterByDecade);
+
+    function leftFilterByPlatform() {
+        const selectedPlatform = LTplatformFilter.value;
+
+        leftGameRows.forEach((row) => {
+            const platform = row.getAttribute("data-platform");
+
+            if (selectedPlatform === "All" || selectedPlatform === platform) {
+                row.style.display = ""; 
+            } else {
+                row.style.display = "none"; 
+            }
+        });
+    }
+
+    function leftFilterByGenre() {
+        const selectedGenre = LTgenreFilter.value;
+
+        leftGameRows.forEach((row) => {
+            const genreString = row.getAttribute("data-genre");
+            const genres = genreString.split(',').map((genre) => genre.trim());
+
+            if (selectedGenre === "All" || genres.includes(selectedGenre)) {
+                row.style.display = ""; 
+            } else {
+                row.style.display = "none"; 
+            }
+        });
+    }
+
+    function leftFilterByDecade() {
+        const selectedDecade = LTdecadeFilter.value;
+
+        leftGameRows.forEach((row) => {
+            const decade = row.getAttribute("data-decade");
+
+            if (selectedDecade === "All" || selectedDecade === decade) {
+                row.style.display = ""; 
+            } else {
+                row.style.display = "none"; 
+            }
+        });
+    }
+
+    function rightFilterByPlatform() {
+        const selectedPlatform = RTplatformFilter.value;
+
+        rightGameRows.forEach((row) => {
+            const platform = row.getAttribute("data-platform");
+
+            if (selectedPlatform === "All" || selectedPlatform === platform) {
+                row.style.display = ""; 
+            } else {
+                row.style.display = "none"; 
+            }
+        });
+    }
+
+    function rightFilterByGenre() {
+        const selectedGenre = RTgenreFilter.value;
+
+        rightGameRows.forEach((row) => {
+            const genreString = row.getAttribute("data-genre");
+            const genres = genreString.split(',').map((genre) => genre.trim());
+
+            if (selectedGenre === "All" || genres.includes(selectedGenre)) {
+                row.style.display = ""; 
+            } else {
+                row.style.display = "none"; 
+            }
+        });
+    }
+
+    function rightFilterByDecade() {
+        const selectedDecade = RTdecadeFilter.value;
+
+        rightGameRows.forEach((row) => {
+            const decade = row.getAttribute("data-decade");
+
+            if (selectedDecade === "All" || selectedDecade === decade) {
+                row.style.display = ""; 
+            } else {
+                row.style.display = "none"; 
+            }
+        });
+    }
+</script>
+
+<script>
+
+    const leftTableBody = document.getElementById("leftTableBody");
+    const rightTableBody = document.getElementById("rightTableBody");
+
+
+    function updateLeftTableHeight() {
+        const visibleRows = leftTableBody.querySelectorAll("tr[style='']");
+        let totalHeight = 0;
+
+        visibleRows.forEach((row) => {
+            totalHeight += row.clientHeight;
+        });
+
+        leftTableBody.parentElement.style.height = totalHeight + "px";
+    }
+
+    function updateRightTableHeight() {
+        const visibleRows = rightTableBody.querySelectorAll("tr[style='']");
+        let totalHeight = 0;
+
+        visibleRows.forEach((row) => {
+            totalHeight += row.clientHeight;
+        });
+
+        rightTableBody.parentElement.style.height = totalHeight + "px";
+    }
+
+    updateLeftTableHeight();
+    updateRightTableHeight();
+
+</script>
 {% endblock %}

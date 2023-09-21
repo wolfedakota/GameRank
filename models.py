@@ -25,7 +25,7 @@ class Game(Base):
     platform_id = Column(Integer, ForeignKey('platform.id'))
     platform = relationship('Platform')
 
-    # genre_id = Column(String(255)) #genre is a string of genre ids, as each games has multiple genres
+    genre_id = Column(String(255)) #genre is a string of genre ids, as each game has multiple genres
     genres = relationship('Genre', secondary=game_genre_association)
 
     release_date = Column(String(255))

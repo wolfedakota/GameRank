@@ -61,10 +61,12 @@ color: blueviolet;
 
   body {
     border-bottom: 50px solid blueviolet;
+    border-bottom-width: 100%;
     background-color:whitesmoke;
     color: rgb(98, 97, 97);
     padding-top: 85px;
     width: 100%;
+
   }
 
   #navSearchBar {
@@ -72,70 +74,73 @@ color: blueviolet;
   }
 
 
-/* Style the table */
 table {
   border-collapse: collapse;
   width: 100%;
   margin-bottom: 1rem;
 }
 
-/* Style the table header */
 th {
   background-color: blueviolet;
   border: 1px solid #dddddd;
   color: whitesmoke;
   text-align: left;
   padding: 8px;
+  font-size: 10px;
 }
 
-/* Style the table data cells */
 td {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+  font-size: 10px;
+  /* max-height: 20px; */
 }
 
-  /* Carousel base class */
-  .carousel {
-    /* margin-top: 4rem; */
-    margin-bottom: 1rem;
-  }
-  /* Since positioning the image, we need to help out the caption */
-  .carousel-caption {
-    top: 8rem;
-    z-index: 10;
-    text-align: center;
-  }
+/* tr.game-row {
+  max-height: 20px;
+} */
 
-  #gameImage {
-    margin-top: 2rem;
-    margin-left: 2rem;
-    width: 10%;
-  }
+/* Carousel base class */
+.carousel {
+  /* margin-top: 4rem; */
+  margin-bottom: 1rem;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  top: 8rem;
+  z-index: 10;
+  text-align: center;
+}
 
-  #GameRankScore {
-    font-size: 35px;
-    text-align: center;
-  }
+#gameImage {
+  margin-top: 2rem;
+  margin-left: 2rem;
+  width: 10%;
+}
 
-  #GOYtitle {
-    font-size: 50px;
-    text-align: center;
-  }
+#GameRankScore {
+  font-size: 35px;
+  text-align: center;
+}
 
-  #otherScores {
-    text-align: center;
-  }
+#GOYtitle {
+  font-size: 50px;
+  text-align: center;
+}
 
-  #gameInfo {
-    background-color: white;
-    color: blueviolet;
-  }
-  
-  /* Declare heights because of positioning of img element */
-  .carousel-item {
-    height: 32rem;
-  }
+#otherScores {
+  text-align: center;
+}
+
+#gameInfo {
+  background-color: white;
+  color: blueviolet;
+}
+
+.carousel-item {
+  height: 32rem;
+}
 
 #myCarousel {
   background-color: blueviolet;
@@ -167,4 +172,81 @@ td {
 
 #worstGOY3 {
   background-color: brown;
+}
+
+#leftTable {
+  /* float: left; */
+  width: 50%;
+  margin-right: 2%;
+  /* margin-left: 20px; */
+  /* margin-left: 0px; */
+  /* border-color: blue; */
+}
+
+#rightTable {
+  /* float: right; */
+  width: 50%;
+  margin-left: 2%;
+  /* margin-right: -30px; */
+  /* border-color: blue; */
+}
+
+#tables {
+  /* overflow: hidden; */
+  display: flex;
+  /* justify-content: left;
+  align-items: left; */
+  margin: 0 auto;
+  padding: 0px;
+  border: 0;
+  width: 100%;
+}
+
+#filters {
+  overflow: hidden;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  margin: 0 auto;
+  padding: 0px;
+}
+
+/* #comparisonToolSubHeader {
+  color: white;
+}
+
+#comparisonToolSubHeaders {
+  background-color: blueviolet;
+} */
+
+/* .filter-box {
+  display: block;
+  margin-bottom: 10px;
+} */
+
+.filter-box label {
+  font-weight: bold;
+}
+
+.filter-box select {
+  width: 100%;
+} 
+
+#LTfilters {
+  display: block;
+}
+
+#RTfilters {
+  margin-left: 4%;
+  display: block;
+  /* text-align: center; */
+}
+
+label {
+  font-size: 20px;
+}
+
+.dropdown-menu {
+  max-height: 200px;
+  overflow-y: auto;
 }

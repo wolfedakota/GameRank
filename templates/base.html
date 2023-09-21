@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="static/style/bootstrap-styles.css">
 
   <!--Javascript file-->
-  <script src="static/js/loginTracker.js"></script>
+  <script></script>
 
 <style>
 
@@ -41,25 +41,62 @@
           </form>
       </ul>
       <ul class="navbar-nav ms-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="tableDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">GameRank Data</a>
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="tableDropdown">
+              <a class="dropdown-item" href="/completeDatabase">Complete Database</a>
+              <a class="dropdown-item" href="/BestGames">GameRank's Best</a>
+              <a class="dropdown-item" href="/WorstGames">GameRank's Worst</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="platformDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Popular Platforms</a>
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="platformDropdown">
+              <a class="dropdown-item" href="/3DS">3DS</a>
+              <a class="dropdown-item" href="/PopularPlatforms">DS</a>
+              <a class="dropdown-item" href="/PopularPlatforms">Dreamcast</a>
+              <a class="dropdown-item" href="/PopularPlatforms">GBA</a>
+              <a class="dropdown-item" href="/PopularPlatforms">GameCube</a>
+              <a class="dropdown-item" href="/PopularPlatforms">Nintendo 64</a>
+              <a class="dropdown-item" href="/PopularPlatforms">PC</a>
+              <a class="dropdown-item" href="/PopularPlatforms">PSP</a>
+              <a class="dropdown-item" href="/PopularPlatforms">PlayStation</a>
+              <a class="dropdown-item" href="/PopularPlatforms">PlayStation 2</a>
+              <a class="dropdown-item" href="/PopularPlatforms">PlayStation 3</a>
+              <a class="dropdown-item" href="/PopularPlatforms">PlayStation 4</a>
+              <a class="dropdown-item" href="/PopularPlatforms">Playstation 5</a>
+              <a class="dropdown-item" href="/PopularPlatforms">PlayStation Vita</a>
+              <a class="dropdown-item" href="/PopularPlatforms">Stadia</a>
+              <a class="dropdown-item" href="/PopularPlatforms">Switch</a>
+              <a class="dropdown-item" href="/PopularPlatforms">Wii</a>
+              <a class="dropdown-item" href="/PopularPlatforms">Wii U</a>
+              <a class="dropdown-item" href="/PopularPlatforms">Xbox</a>
+              <a class="dropdown-item" href="/PopularPlatforms">Xbox 360</a>
+              <a class="dropdown-item" href="/PopularPlatforms">Xbox One</a>
+              <a class="dropdown-item" href="/PopularPlatforms">Xbox Series X</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="franchiseDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Popular Franchises</a>
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="franchiseDropdown">
+            <a class="dropdown-item" href="/PopularFranchises">Call of Duty</a>
+            <a class="dropdown-item" href="/PopularFranchises">The Elder Scrolls</a>
+            <a class="dropdown-item" href="/PopularFranchises">Fallout</a>
+            <a class="dropdown-item" href="/PopularFranchises">Halo</a>
+            <a class="dropdown-item" href="/PopularFranchises">The Legend of Zelda</a>
+            <a class="dropdown-item" href="/PopularFranchises">Mario</a>
+          </div>
+        </li>
         <li class="nav-item">
-            <a class="nav-link" href="/BestGames"> GameRank's Best</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/WorstGames">GameRank's Worst</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/PopularFranchises">Popular Franchises</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/ComparisonTool">Comparison Tool</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/Profile">Profile</a>
-          </li>
+          <a class="nav-link" href="/ComparisonTool">Comparison Tool</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/Profile">Profile</a>
+        </li> -->
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          </a>
+        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+            <a class="dropdown-item" href="/Profile">Profile</a>
             <a class="dropdown-item" href="/FavoriteGames">Favorite Games</a>
             <a class="dropdown-item" href="/EditProfile">Edit Profile</a>
             <div class="dropdown-divider"></div>
@@ -76,87 +113,6 @@
       <!-- This block is intentionally left empty -->
     {% endblock %}
   </div>
-
-  <!-- It's container-fluid so it spans the entire page. -->
-  <!-- <div class="container-fluid">
- Begin centered main text -->
-      <!-- <div class="row align-items-center">
-        <section class="col-6 mx-auto" id="splash">
-          <img src="melon.jpg" class="img-fluid center-block" alt="Image of melon" id="hero">
-          <p>We deliver only the highest quality domestic and exotic melons from local, independent farmers from around the world. Our melons are delivered quickly with the greatest care. We guarantee every order, every time.<p>
-        </section>
-    </div> -->
-    <!-- End of centered main text -->
-
-    <!-- Row for features columns -->     
-    <!-- <div class="row" id="featurerow">
-
-      <section class="col feature">
-        <i class="bi bi-trophy"></i>
-        <b>Award Winning</b>
-        <p>
-          Don't take our word for it. <br>
-          See all the awards our melons have earned.
-        </p>
-      </section>
-
-      <section class="col feature">
-        <i class="bi bi-globe"></i>
-        <b>Huge Selection</b>
-        <p>
-          We import melons from all over the world,<br> ensuring we have every melon you could possibly desire.
-        </p>
-      </section>
-
-      <section class="col feature">
-        <i class="bi bi-patch-check"></i>
-        <b>Certified Sustainable</b>
-        <p>
-          Our melons are sourced only from sustainable, organic local farmers. These are the healthiest melons you'll ever eat.
-        </p>
-      </section>
-
-    </div>
- End of three feature columns -->
-
-    <!-- Row for table -->
-    <!-- <div class="row" id="tablerow">
-
-      <section class="col-10 mx-auto d-lg-block d-md-block d-none">
-        <table class="table table-hover table-striped">
-          <thead>
-            <tr>
-                <th>Melon</th>
-                <th>Price</th>
-                <th>Color</th>
-                <th>Country</th>
-            </tr>
-          </thead>
-          <tr>
-            <td>Canteloupe</td>
-            <td>$4.99/lb</td>
-            <td>Tan</td>
-            <td>Italy</td>
-          </tr>
-          <tr>
-              <td>Honeydew</td>
-              <td>$3.99/lb</td>
-              <td>White/Green</td>
-              <td>France/Algeria</td>
-          </tr>
-          <tr>
-              <td>Casaba</td>
-              <td>$7.99/lb</td>
-              <td>Yellow</td>
-              <td>Turkey</td>
-          </tr>
-        </table>
-      </section>
-    </div>  -->
-    <!-- End of table row -->
-  <!-- </div> -->
-<!-- You need this in order to use JS-based components in the 
-further study. Leave this at the bottom and code above it. -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
 integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
