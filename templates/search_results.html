@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Search Results for '{{ user_search_result }}'</h1>
+
+<h6>(If table is empty, no results were found.)</h6>
+
+<table id="searchResultGamesTable" border="1">
+    <thead>
+        <tr>
+            <th>GameRank</th>
+            <th>Title</th>
+            <th>Release Date</th>
+            <th>Platform</th>
+            <th>Meta Score</th>
+            <th>User Score</th>
+            <th>GameRank Score</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+        {% for game in search_result_games %}
+                <tr class="game-row" data-platform="{{ game.platform.name }}"  data-genre="{% for genre in game.genres %}{{ genre.name }}{% if not loop.last %}, {% endif %}{% endfor %}"  data-decade="{{ game.decade.name }}">
+            <td>{{ game.gamerank }}</td>
+            <td>{{ game.game_title }}</td>
+            <td>{{ game.release_date }}</td>
+            <td>{{ game.platform.name }}</td>
+            <td>{{ game.metascore }}</td>
+            <td>{{ game.user_score }}</td>
+            <td>{{ game.gamerank_score }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

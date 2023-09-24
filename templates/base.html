@@ -35,10 +35,10 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
-        <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search" id="navSearchBar">
-            <button class="btn search-button" type="submit"><i class="bi bi-search"></i></button>
-          </form>
+        <form class="d-flex" method="POST" action="/SearchResults">
+          <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search" name="navSearchBar" id="navSearchBar">
+          <button class="btn search-button" type="submit"><i class="bi bi-search"></i></button>
+        </form>
       </ul>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item dropdown">
@@ -53,38 +53,38 @@
           <a class="nav-link dropdown-toggle" href="#" id="platformDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Popular Platforms</a>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="platformDropdown">
               <a class="dropdown-item" href="/3DS">3DS</a>
-              <a class="dropdown-item" href="/PopularPlatforms">DS</a>
-              <a class="dropdown-item" href="/PopularPlatforms">Dreamcast</a>
-              <a class="dropdown-item" href="/PopularPlatforms">GBA</a>
-              <a class="dropdown-item" href="/PopularPlatforms">GameCube</a>
-              <a class="dropdown-item" href="/PopularPlatforms">Nintendo 64</a>
-              <a class="dropdown-item" href="/PopularPlatforms">PC</a>
-              <a class="dropdown-item" href="/PopularPlatforms">PSP</a>
-              <a class="dropdown-item" href="/PopularPlatforms">PlayStation</a>
-              <a class="dropdown-item" href="/PopularPlatforms">PlayStation 2</a>
-              <a class="dropdown-item" href="/PopularPlatforms">PlayStation 3</a>
-              <a class="dropdown-item" href="/PopularPlatforms">PlayStation 4</a>
-              <a class="dropdown-item" href="/PopularPlatforms">Playstation 5</a>
-              <a class="dropdown-item" href="/PopularPlatforms">PlayStation Vita</a>
-              <a class="dropdown-item" href="/PopularPlatforms">Stadia</a>
-              <a class="dropdown-item" href="/PopularPlatforms">Switch</a>
-              <a class="dropdown-item" href="/PopularPlatforms">Wii</a>
-              <a class="dropdown-item" href="/PopularPlatforms">Wii U</a>
-              <a class="dropdown-item" href="/PopularPlatforms">Xbox</a>
-              <a class="dropdown-item" href="/PopularPlatforms">Xbox 360</a>
-              <a class="dropdown-item" href="/PopularPlatforms">Xbox One</a>
-              <a class="dropdown-item" href="/PopularPlatforms">Xbox Series X</a>
+              <a class="dropdown-item" href="/DS">DS</a>
+              <a class="dropdown-item" href="/Dreamcast">Dreamcast</a>
+              <a class="dropdown-item" href="/GBA">GBA</a>
+              <a class="dropdown-item" href="/GameCube">GameCube</a>
+              <a class="dropdown-item" href="/N64">Nintendo 64</a>
+              <a class="dropdown-item" href="/PC">PC</a>
+              <a class="dropdown-item" href="/PSP">PSP</a>
+              <a class="dropdown-item" href="/PS1">PlayStation</a>
+              <a class="dropdown-item" href="/PS2">PlayStation 2</a>
+              <a class="dropdown-item" href="/PS3">PlayStation 3</a>
+              <a class="dropdown-item" href="/PS4">PlayStation 4</a>
+              <a class="dropdown-item" href="/PS5">Playstation 5</a>
+              <a class="dropdown-item" href="/PSVita">PlayStation Vita</a>
+              <a class="dropdown-item" href="/Stadia">Stadia</a>
+              <a class="dropdown-item" href="/Switch">Switch</a>
+              <a class="dropdown-item" href="/Wii">Wii</a>
+              <a class="dropdown-item" href="/WiiU">Wii U</a>
+              <a class="dropdown-item" href="/Xbox">Xbox</a>
+              <a class="dropdown-item" href="/Xbox360">Xbox 360</a>
+              <a class="dropdown-item" href="/XboxOne">Xbox One</a>
+              <a class="dropdown-item" href="/XboxSeriesX">Xbox Series X</a>
           </div>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="franchiseDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Popular Franchises</a>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="franchiseDropdown">
-            <a class="dropdown-item" href="/PopularFranchises">Call of Duty</a>
-            <a class="dropdown-item" href="/PopularFranchises">The Elder Scrolls</a>
-            <a class="dropdown-item" href="/PopularFranchises">Fallout</a>
-            <a class="dropdown-item" href="/PopularFranchises">Halo</a>
-            <a class="dropdown-item" href="/PopularFranchises">The Legend of Zelda</a>
-            <a class="dropdown-item" href="/PopularFranchises">Mario</a>
+            <a class="dropdown-item" href="/CallOfDuty">Call of Duty</a>
+            <a class="dropdown-item" href="/TheElderScrolls">The Elder Scrolls</a>
+            <a class="dropdown-item" href="/Fallout">Fallout</a>
+            <a class="dropdown-item" href="/Halo">Halo</a>
+            <a class="dropdown-item" href="/TheLegendOfZelda">The Legend of Zelda</a>
+            <a class="dropdown-item" href="/Mario">Mario</a>
           </div>
         </li>
         <li class="nav-item">
