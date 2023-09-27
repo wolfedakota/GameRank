@@ -2,12 +2,13 @@
 
 from jinja2 import StrictUndefined
 from flask_sqlalchemy import SQLAlchemy
-from flask import Flask, render_template, request, flash, redirect, session
+from flask import Flask, render_template, request, flash, redirect, session, url_for, jsonify
 from databaseSessions import Session
-from models import Game, Platform, Genre, Decade
+from models import Game, Platform, Genre, Decade, User, users_favorite_games
 from sqlalchemy import and_, or_, desc, asc
 
 app = Flask(__name__)
+app.secret_key = 'your_secret_key_here'
 
 @app.route('/')
 def index():
@@ -30,7 +31,6 @@ def index():
     
     session.close()
 
-    # Pass the data to the HTML template
     return render_template('homepage.html', top_games=top_games, bottom_games=bottom_games)
 
 @app.route('/SearchResults', methods=['GET', 'POST'])
@@ -795,9 +795,27 @@ def complete_database():
     for i, game in enumerate(allGames, start=1):
         game.gamerank = i
 
-    session.close()
-
     return render_template("completeDatabase.html", allGames=allGames, gamePlatforms=gamePlatforms, gameGenres=gameGenres)
+
+@app.route('/add_to_favorites', methods=['POST'])
+def add_to_favorites():
+    """Adds favorites to the user's favorite games"""
+    SQLsession = Session()
+
+    game_id = request.form.get('gameId')
+    user_id = session.get('user_id')
+    if user_id:
+        try:
+            ins = users_favorite_games.insert().values(user_id=user_id, game_id=game_id)
+            SQLsession.execute(ins)
+            SQLsession.commit()
+            return jsonify({'message': 'Game added to favorites!'})
+        except Exception as e:
+            # Handle database errors, log the exception, and return an error response
+            print(f"Database error: {e}")
+            return jsonify({'message': 'Error adding game to favorites.'}), 500
+    else:
+        return redirect(url_for('login'))
 
 @app.route('/BestGames')
 def best_games():
@@ -845,13 +863,42 @@ def comparison_tool():
 def profile():
     """A page containing the user's profile"""
 
-    return render_template("profile.html")
+    user_id = session.get('user_id')
+    if user_id:
+        # User is logged in, fetch their information from the database
+        SQLsession = Session()
+        user = SQLsession.query(User).filter(User.id == user_id).first()
+        SQLsession.close()
+
+        return render_template('profile.html', user=user)
+    else:
+        # User is not logged in, redirect to the login page
+        return redirect(url_for('login'))
 
 @app.route('/FavoriteGames')
 def favorite_games():
     """A page containing a list of the user's favorite games"""
+    SQLsession = Session()
 
-    return render_template("favoriteGames.html")
+    allGames = SQLsession.query(Game) \
+    .order_by(desc(Game.gamerank_score)) \
+    .all()
+
+    user_id = session.get('user_id')
+    if not user_id:
+        return redirect(url_for('login'))  
+
+    favorite_games = (
+        SQLsession.query(Game)
+        .join(users_favorite_games)
+        .filter(users_favorite_games.c.user_id == user_id)
+        .all()
+    )
+
+    for i, game in enumerate(allGames, start=1):
+        game.gamerank = i
+
+    return render_template('favoriteGames.html', favorite_games=favorite_games)
 
 @app.route('/EditProfile')
 def edit_profile():
@@ -859,12 +906,79 @@ def edit_profile():
 
     return render_template("editProfile.html")
 
-@app.route('/Login')
+@app.route('/Login', methods=['GET', 'POST'])
 def login():
     """A page containing a login window"""
 
-    return render_template("login.html")
+    username = request.form.get('username')
+    password = request.form.get('password')
 
+    # Query the database to find the user with the given username
+    SQLsession = Session()
+    user = SQLsession.query(User).filter(User.username == username).first()
+    SQLsession.close()
+
+    if user and user.password == password:
+        # Valid credentials, store user information in session
+        session['user_id'] = user.id
+        return redirect(url_for('profile'))
+    else:
+        valid_credentials = False
+        return render_template('login.html', valid_credentials=valid_credentials)
+    
+@app.route('/LogOut')
+def log_out():
+    """Log out function"""
+
+    session.clear()
+
+    return redirect('/Login')
+
+
+@app.route('/newProfile', methods=['GET', 'POST'])
+def new_profile():
+    """A page containing a profile creation window"""
+    if request.method == 'POST':
+        new_username = request.form['newUsername']
+        new_password = request.form['newPassword']
+        new_bio = request.form['newBio']
+        new_discord = request.form['newDiscord']
+        new_nintendo = request.form['newNintendo']
+        new_steam = request.form['newSteam']
+        new_playstation = request.form['newPlayStation']
+        new_xbox = request.form['newXbox']
+        
+        # Create a new user instance
+        new_user = User(
+            username=new_username,
+            password=new_password,
+            bio=new_bio,
+            discord_link=new_discord,
+            nintendo_link=new_nintendo,
+            steam_link=new_steam,
+            playstation_link=new_playstation,
+            xbox_link=new_xbox
+        )
+
+        # Create a database session
+        session = Session()
+
+        try:
+            # Add the new user to the session and commit to the database
+            session.add(new_user)
+            session.commit()
+            return redirect("/Login")  # Redirect to a success page
+        except Exception as e:
+            session.rollback()
+            # Handle the error (e.g., display an error message)
+        finally:
+            session.close()
+
+    return render_template("newProfile.html")
+
+# @app.route('/success')
+# def success():
+#     return "Account created successfully!"
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

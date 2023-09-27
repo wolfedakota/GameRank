@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Create a GameRank account</h1>
+
+<h6>(Only username and password are required)</h6>
+
+<form id="newUserForm" method="POST" action="/newProfile">
+    <div>
+        <label for="newUsername">Username:</label>
+        <input type="text" id="newUsername" name="newUsername" required>
+    </div>
+    <div>
+        <label for="newPassword">Password:</label>
+        <input type="password" id="newPassword" name="newPassword" required>
+    </div>
+    <div>
+        <label for="newBio">Bio:</label>
+        <input type="text" id="newBio" name="newBio">
+    </div>
+    <div>
+        <label for="newDicord">Discord Link:</label>
+        <input type="text" id="newDiscord" name="newDiscord">
+    </div>
+    <div>
+        <label for="newNintendo">Nintendo Link:</label>
+        <input type="text" id="newNintendo" name="newNintendo">
+    </div>
+    <div>
+        <label for="newSteam">Steam Link:</label>
+        <input type="text" id="newSteam" name="newSteam">
+    </div>
+    <div>
+        <label for="newPlayStation">PlayStation Link:</label>
+        <input type="text" id="newPlayStation" name="newPlayStation">
+    </div>
+    <div>
+        <label for="newXbox">Xbox Link:</label>
+        <input type="text" id="newXbox" name="newXbox">
+    </div>
+    <div>
+        <button type="submit">Create Account</button>
+    </div>
+</form>
+
+{% endblock %}

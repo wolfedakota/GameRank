@@ -2,5 +2,23 @@
 
 {% block content %}
 
+<h1>Sign In</h1>
+
+<form id="signInForm" method="POST" action="/Login">
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <div>
+        <a>New user? Create an account <a href="/newProfile">here.</a></a>
+    </div>
+    <div>
+        <button type="submit">Sign In</button>
+    </div>
+</form>
 
 {% endblock %}

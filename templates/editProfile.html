@@ -2,5 +2,40 @@
 
 {% block content %}
 
+<h1>Profile Editor</h1>
+
+<form id="editUserForm">
+    <div>
+        <label for="editUsername">Username:</label>
+        <input type="text" id="editUsername" name="editUsername">
+    </div>
+    <div>
+        <label for="editBio">Bio:</label>
+        <input type="text" id="editBio" name="editBio">
+    </div>
+    <div>
+        <label for="editDicord">Discord Link:</label>
+        <input type="text" id="editDiscord" name="editDiscord">
+    </div>
+    <div>
+        <label for="editNintendo">Nintendo Link:</label>
+        <input type="text" id="editNintendo" name="editNintendo">
+    </div>
+    <div>
+        <label for="editPlayStation">PlayStation Link:</label>
+        <input type="text" id="editPlayStation" name="editPlayStation">
+    </div>
+    <div>
+        <label for="editSteam">Steam Link:</label>
+        <input type="text" id="editSteam" name="editSteam">
+    </div>
+    <div>
+        <label for="editXbox">Xbox Link:</label>
+        <input type="text" id="editXbox" name="editXbox">
+    </div>
+    <div>
+        <button type="submit">Submit Changes</button>
+    </div>
+</form>
 
 {% endblock %}

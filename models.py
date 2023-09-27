@@ -11,6 +11,32 @@ game_genre_association = Table(
     Column('genre_id', String, ForeignKey('genre.id'))
 )
 
+users_favorite_games = Table(
+    'users_favorite_games', 
+    Base.metadata,
+    Column('user_id', Integer, ForeignKey('users.id')),
+    Column('game_id', Integer, ForeignKey('games.id'))
+)
+
+class User(Base):
+    __tablename__ = 'users'
+
+    id = Column(Integer, primary_key=True)
+    username = Column(String)
+    password = Column(String)
+    bio = Column(String)
+    discord_link = Column(String)
+    nintendo_link = Column(String)
+    playstation_link = Column(String)
+    steam_link = Column(String)
+    xbox_link = Column(String)
+    favorite_platform = Column(String)
+    favorite_decade = Column(String)
+    favorite_genre = Column(String)
+    average_gamerank_score = Column(String)
+    average_meta_score = Column(String)
+    average_user_score = Column(String)
+
 class Game(Base):
     __tablename__ = 'games'
 
