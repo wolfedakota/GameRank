@@ -5,10 +5,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, request, flash, redirect, session, url_for, jsonify
 from databaseSessions import Session
 from models import Game, Platform, Genre, Decade, User, users_favorite_games
-from sqlalchemy import and_, or_, desc, asc
+from sqlalchemy import and_, or_, desc, asc, delete
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'
+app.secret_key = 'secret_key_here'
 
 @app.route('/')
 def index():
@@ -56,11 +56,11 @@ def search_results():
     return render_template('search_results.html', search_result_games=search_result_games, user_search_result=user_search_result)
 
 
-@app.route('/PopularFranchises')
-def popular_franchises():
-    """A page containing data regarding the top gaming franchises"""
+# @app.route('/PopularFranchises')
+# def popular_franchises():
+#     """A page containing data regarding the top gaming franchises"""
 
-    return render_template("popularFranchises.html")
+#     return render_template("popularFranchises.html")
 
 @app.route('/CallOfDuty')
 def popular_franchises_COD():
@@ -176,11 +176,11 @@ def popular_franchises_mario():
 
     return render_template("popularFranchisesMario.html", mario_games=mario_games)
 
-@app.route('/PopularPlatforms')
-def popular_platforms():
-    "A page containing data specific to a popular platform"
+# @app.route('/PopularPlatforms')
+# def popular_platforms():
+#     "A page containing data specific to a popular platform"
 
-    return render_template("popularPlatforms.html")
+#     return render_template("popularPlatforms.html")
 
 @app.route('/3DS')
 def popular_platforms_3DS():
@@ -811,23 +811,118 @@ def add_to_favorites():
             SQLsession.commit()
             return jsonify({'message': 'Game added to favorites!'})
         except Exception as e:
-            # Handle database errors, log the exception, and return an error response
             print(f"Database error: {e}")
             return jsonify({'message': 'Error adding game to favorites.'}), 500
     else:
         return redirect(url_for('login'))
+    
+@app.route('/remove_from_favorites', methods=['POST'])
+def remove_from_favorites():
+    """Adds favorites to the user's favorite games"""
+    SQLsession = Session()
+
+    game_id = request.form.get('gameId')
+    user_id = session.get('user_id')
+    if user_id:
+        try:
+            delete_statement = delete(users_favorite_games).where(
+                (users_favorite_games.c.user_id == user_id) &
+                (users_favorite_games.c.game_id == game_id)
+            )
+            SQLsession.execute(delete_statement)
+            SQLsession.commit()
+            return jsonify({'message': 'Game removed from favorites!'})
+        except Exception as e:
+            print(f"Database error: {e}")
+            return jsonify({'message': 'Error removing game from favorites.'}), 500
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/updateProfile', methods=['POST'])
+def update_profile():
+    if request.method == 'POST':
+        # Retrieve the edited profile data from the form
+        SQLsession = Session()
+
+        edit_username = request.form.get('editUsername')
+        edit_bio = request.form.get('editBio')
+        edit_discord = request.form.get('editDiscord')
+        edit_nintendo = request.form.get('editNintendo')
+        edit_playstation = request.form.get('editPlayStation')
+        edit_steam = request.form.get('editSteam')
+        edit_xbox = request.form.get('editXbox')
+        # Add similar lines for other profile data fields
+
+        # Update the user's profile in the database
+        user_id = session.get('user_id')  # Get the user's ID from the session
+        if user_id:
+            user = SQLsession.query(User).filter_by(id=user_id).first()
+            if user:
+                # Update the profile data
+                user.username = edit_username
+                user.bio = edit_bio
+                user.discord_link = edit_discord
+                user.nintendo_link = edit_nintendo
+                user.playstation_link = edit_playstation
+                user.steam_link = edit_steam
+                user.xbox_link = edit_xbox
+                SQLsession.commit()
+                return jsonify({'message': 'Profile updated successfully!'})
+    
+    # Handle any errors or redirect as needed
+    return jsonify({'error': 'Failed to update profile.'})
 
 @app.route('/BestGames')
 def best_games():
     """A page containing a list of the top games"""
+    session = Session()
 
-    return render_template("topGames.html")
+    allGames = session.query(Game) \
+    .order_by(desc(Game.gamerank_score)) \
+    .all()
+
+    top_gamesOAT = session.query(Game) \
+    .order_by(desc(Game.gamerank_score)) \
+    .limit(100) \
+    .all()
+
+    gamePlatforms = session.query(Platform) \
+    .all()
+    
+    gameGenres = session.query(Genre) \
+    .group_by(Genre.name) \
+    .all()
+
+    for i, game in enumerate(allGames, start=1):
+        game.gamerank = i
+
+    return render_template("topGames.html", top_gamesOAT=top_gamesOAT, gamePlatforms=gamePlatforms, gameGenres=gameGenres)
 
 @app.route('/WorstGames')
 def worst_games():
     """A page containing a list of the worst games"""
+    session = Session()
 
-    return render_template("worstGames.html")
+    allGames = session.query(Game) \
+    .order_by(desc(Game.gamerank_score)) \
+    .all()
+
+    worst_gamesOAT = session.query(Game) \
+    .order_by(asc(Game.gamerank_score)) \
+    .limit(100) \
+    .all()
+
+    gamePlatforms = session.query(Platform) \
+    .all()
+    
+    gameGenres = session.query(Genre) \
+    .group_by(Genre.name) \
+    .all()
+
+    for i, game in enumerate(allGames, start=1):
+        game.gamerank = i
+
+    return render_template("worstGames.html", worst_gamesOAT=worst_gamesOAT, gamePlatforms=gamePlatforms, gameGenres=gameGenres)
 
 @app.route('/ComparisonTool')
 def comparison_tool():
@@ -854,8 +949,6 @@ def comparison_tool():
     
     gameDecades = session.query(Decade) \
         .all()
-
-    session.close()
 
     return render_template("comparisonTool.html", tableGames=tableGames, gamePlatforms=gamePlatforms, gameGenres=gameGenres, gameDecades=gameDecades)
 
@@ -903,8 +996,15 @@ def favorite_games():
 @app.route('/EditProfile')
 def edit_profile():
     """A page containing an editing tool for the user's profile"""
+    SQLsession = Session()
 
-    return render_template("editProfile.html")
+    user_id = session.get('user_id')
+    if not user_id:
+        return redirect(url_for('login'))
+    
+    user = SQLsession.query(User).filter_by(id=user_id).first()
+
+    return render_template("editProfile.html", user=user)
 
 @app.route('/Login', methods=['GET', 'POST'])
 def login():

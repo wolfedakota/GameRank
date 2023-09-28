@@ -267,107 +267,91 @@
     const LTplatformFilter = document.getElementById("LTplatformFilter");
     const LTgenreFilter = document.getElementById("LTgenreFilter");
     const LTdecadeFilter = document.getElementById("LTdecadeFilter");
+    let LTselectedPlatform = "All";
+    let LTselectedGenre = "All";
+    let LTselectedDecade = "All";
 
     const RTplatformFilter = document.getElementById("RTplatformFilter");
     const RTgenreFilter = document.getElementById("RTgenreFilter");
     const RTdecadeFilter = document.getElementById("RTdecadeFilter");
+    let RTselectedPlatform = "All";
+    let RTselectedGenre = "All";
+    let RTselectedDecade = "All";
 
     const leftGameRows = document.querySelectorAll(".left-game-row");
     const rightGameRows = document.querySelectorAll(".right-game-row");
 
-    LTplatformFilter.addEventListener("change", leftFilterByPlatform);
-    LTgenreFilter.addEventListener("change", leftFilterByGenre);
-    LTdecadeFilter.addEventListener("change", leftFilterByDecade);
+    LTplatformFilter.addEventListener("change", function () {
+        LTselectedPlatform = LTplatformFilter.value;
+        LTapplyFilters();
+    });
 
-    RTplatformFilter.addEventListener("change", rightFilterByPlatform);
-    RTgenreFilter.addEventListener("change", rightFilterByGenre);
-    RTdecadeFilter.addEventListener("change", rightFilterByDecade);
+    LTgenreFilter.addEventListener("change", function () {
+        LTselectedGenre = LTgenreFilter.value;
+        LTapplyFilters();
+    });
 
-    function leftFilterByPlatform() {
-        const selectedPlatform = LTplatformFilter.value;
+    LTdecadeFilter.addEventListener("change", function () {
+        LTselectedDecade = LTdecadeFilter.value;
+        LTapplyFilters();
+    });
+    
+    RTplatformFilter.addEventListener("change", function () {
+        RTselectedPlatform = RTplatformFilter.value;
+        RTapplyFilters();
+    });
 
-        leftGameRows.forEach((row) => {
-            const platform = row.getAttribute("data-platform");
+    RTgenreFilter.addEventListener("change", function () {
+        RTselectedGenre = RTgenreFilter.value;
+        RTapplyFilters();
+    });
 
-            if (selectedPlatform === "All" || selectedPlatform === platform) {
-                row.style.display = ""; 
-            } else {
-                row.style.display = "none"; 
-            }
-        });
-    }
+    RTdecadeFilter.addEventListener("change", function () {
+        RTselectedDecade = RTdecadeFilter.value;
+        RTapplyFilters();
+    });
 
-    function leftFilterByGenre() {
-        const selectedGenre = LTgenreFilter.value;
+    function LTapplyFilters() {
+    leftGameRows.forEach((row) => {
+        const platform = row.getAttribute("data-platform");
+        const genreString = row.getAttribute("data-genre");
+        const genres = genreString.split(',').map((genre) => genre.trim());
+        const decade = row.getAttribute("data-decade");
 
-        leftGameRows.forEach((row) => {
-            const genreString = row.getAttribute("data-genre");
-            const genres = genreString.split(',').map((genre) => genre.trim());
+        const platformMatch = LTselectedPlatform === "All" || LTselectedPlatform === platform;
+        const genreMatch = LTselectedGenre === "All" || genres.includes(LTselectedGenre);
+        const decadeMatch = LTselectedDecade === "All" || LTselectedDecade === decade;
 
-            if (selectedGenre === "All" || genres.includes(selectedGenre)) {
-                row.style.display = ""; 
-            } else {
-                row.style.display = "none"; 
-            }
-        });
-    }
+        if (platformMatch && genreMatch && decadeMatch) {
+            row.style.display = "";
+        } else {
+            row.style.display = "none";
+        }
+    });
+}
 
-    function leftFilterByDecade() {
-        const selectedDecade = LTdecadeFilter.value;
+LTapplyFilters();
 
-        leftGameRows.forEach((row) => {
-            const decade = row.getAttribute("data-decade");
-
-            if (selectedDecade === "All" || selectedDecade === decade) {
-                row.style.display = ""; 
-            } else {
-                row.style.display = "none"; 
-            }
-        });
-    }
-
-    function rightFilterByPlatform() {
-        const selectedPlatform = RTplatformFilter.value;
-
+    function RTapplyFilters() {
         rightGameRows.forEach((row) => {
             const platform = row.getAttribute("data-platform");
-
-            if (selectedPlatform === "All" || selectedPlatform === platform) {
-                row.style.display = ""; 
-            } else {
-                row.style.display = "none"; 
-            }
-        });
-    }
-
-    function rightFilterByGenre() {
-        const selectedGenre = RTgenreFilter.value;
-
-        rightGameRows.forEach((row) => {
             const genreString = row.getAttribute("data-genre");
             const genres = genreString.split(',').map((genre) => genre.trim());
-
-            if (selectedGenre === "All" || genres.includes(selectedGenre)) {
-                row.style.display = ""; 
-            } else {
-                row.style.display = "none"; 
-            }
-        });
-    }
-
-    function rightFilterByDecade() {
-        const selectedDecade = RTdecadeFilter.value;
-
-        rightGameRows.forEach((row) => {
             const decade = row.getAttribute("data-decade");
 
-            if (selectedDecade === "All" || selectedDecade === decade) {
-                row.style.display = ""; 
+            const platformMatch = RTselectedPlatform === "All" || RTselectedPlatform === platform;
+            const genreMatch = RTselectedGenre === "All" || genres.includes(RTselectedGenre);
+            const decadeMatch = RTselectedDecade === "All" || RTselectedDecade === decade;
+
+            if (platformMatch && genreMatch && decadeMatch) {
+                row.style.display = "";
             } else {
-                row.style.display = "none"; 
+                row.style.display = "none";
             }
         });
     }
+
+RTapplyFilters();
 </script>
 
 <script>

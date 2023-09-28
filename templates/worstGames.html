@@ -4,8 +4,60 @@
 
 <h1>GameRank's Worst Games of All Time</h1>
 
+<table id="worstGamesTable" border="1">
+    <thead>
+        <tr>
+            <th>GameRank</th>
+            <th>Title</th>
+            <th>Release Date</th>
+            <th>Platform</th>
+            <th>Meta Score</th>
+            <th>User Score</th>
+            <th>GameRank Score</th>
+            <th>Favorite</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+        {% for game in worst_gamesOAT %}
+        <tr class="game-row" data-platform="{{ game.platform.name }}"  data-genre="{% for genre in game.genres %}{{ genre.name }}{% if not loop.last %}, {% endif %}{% endfor %}"  data-decade="{{ game.decade.name }}">
+            <td>{{ game.gamerank }}</td>
+            <td>{{ game.game_title }}</td>
+            <td>{{ game.release_date }}</td>
+            <td>{{ game.platform.name }}</td>
+            <td>{{ game.metascore }}</td>
+            <td>{{ game.user_score }}</td>
+            <td>{{ game.gamerank_score }}</td>
+            <td><button class="addToFavorites" data-game-id="{{ game.id }}">Add to Favorites</button></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<script>
+    $(document).ready(function() {
+        // Use event delegation to handle button clicks
+        $("#tableBody").on("click", ".addToFavorites", function() {
+            // Get the game ID from the data attribute
+            var gameId = $(this).data("game-id");
+    
+            // Send an AJAX request to add the game to favorites
+            $.ajax({
+                type: "POST", // You can use POST or another HTTP method
+                url: "/add_to_favorites", // Replace with your server route
+                data: { gameId: gameId },
+                success: function(response) {
+                    // Handle the server's response (e.g., show a success message)
+                    alert("Added to Favorites!");
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors (e.g., show an error message)
+                    console.error(error);
+                }
+            });
+        });
+    });
+</script>
 
-<table border="1">
+<!-- <table border="1">
 <tr><th>GameRank</th></th><th>Title</th><th>Release Date</th><th>Platform</th><th>Meta Score</th><th>User Score</th><th>GameRank Score</th></tr>
 <tr><td>20507.</td><td>Ride to Hell: Retribution</td><td>June 24, 2013</td><td>PC</td><td>16</td><td>14</td><td>15</td></tr>
 <tr><td>20506.</td><td>Alone in the Dark: Illumination</td><td>June 11, 2015</td><td>PC</td><td>19</td><td>13</td><td>16</td></tr>
@@ -107,7 +159,7 @@
 <tr><td>20409.</td><td>Umbrella Corps</td><td>June 21, 2016</td><td>PlayStation 4</td><td>38</td><td>24</td><td>31</td></tr>
 <tr><td>20408.</td><td>Kick-Ass: The Game</td><td>April 29, 2010</td><td>PlayStation 3</td><td>33</td><td>28</td><td>31</td></tr>
 <tr><td>20407.</td><td>Bruce Lee: Quest of the Dragon</td><td>July 1, 2002</td><td>Xbox</td><td>32</td><td>29</td><td>31</td></tr>
-</table>
+</table> -->
 
 
 {% endblock %}

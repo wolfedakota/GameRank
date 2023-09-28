@@ -7,35 +7,65 @@
 <form id="editUserForm">
     <div>
         <label for="editUsername">Username:</label>
-        <input type="text" id="editUsername" name="editUsername">
+        <input type="text" id="editUsername" name="editUsername" value="{{ user.username }}">
     </div>
     <div>
         <label for="editBio">Bio:</label>
-        <input type="text" id="editBio" name="editBio">
+        <input type="text" id="editBio" name="editBio" value="{{ user.bio }}">
     </div>
     <div>
-        <label for="editDicord">Discord Link:</label>
-        <input type="text" id="editDiscord" name="editDiscord">
+        <label for="editDicord">Discord:</label>
+        <input type="text" id="editDiscord" name="editDiscord" value="{{ user.discord_link }}">
     </div>
     <div>
-        <label for="editNintendo">Nintendo Link:</label>
-        <input type="text" id="editNintendo" name="editNintendo">
+        <label for="editNintendo">Nintendo:</label>
+        <input type="text" id="editNintendo" name="editNintendo" value="{{ user.nintendo_link }}">
     </div>
     <div>
-        <label for="editPlayStation">PlayStation Link:</label>
-        <input type="text" id="editPlayStation" name="editPlayStation">
+        <label for="editPlayStation">PlayStation:</label>
+        <input type="text" id="editPlayStation" name="editPlayStation" value="{{ user.playstation_link }}">
     </div>
     <div>
-        <label for="editSteam">Steam Link:</label>
-        <input type="text" id="editSteam" name="editSteam">
+        <label for="editSteam">Steam:</label>
+        <input type="text" id="editSteam" name="editSteam" value="{{ user.steam_link }}">
     </div>
     <div>
-        <label for="editXbox">Xbox Link:</label>
-        <input type="text" id="editXbox" name="editXbox">
+        <label for="editXbox">Xbox:</label>
+        <input type="text" id="editXbox" name="editXbox" value="{{ user.xbox_link }}">
     </div>
     <div>
         <button type="submit">Submit Changes</button>
     </div>
 </form>
+<script>
+$(document).ready(function() {
+    $("#editUserForm").submit(function(e) {
+        e.preventDefault();
 
+        var editedData = {
+            editUsername: $("#editUsername").val(),
+            editBio: $("#editBio").val(),
+            editDiscord: $("#editDiscord").val(),
+            editNintendo: $("#editNintendo").val(),
+            editSteam: $("#editSteam").val(),
+            editPlayStation: $("#editPlayStation").val(),
+            editXbox: $("#editXbox").val(),
+        };
+
+        $.ajax({
+            type: "POST",  // You can use POST or another HTTP method
+            url: "/updateProfile",  // Replace with your server route for updating the profile
+            data: editedData,
+            success: function(response) {
+                // Handle the server's response (e.g., show a success message)
+                alert("Profile updated successfully!");
+            },
+            error: function(xhr, status, error) {
+                // Handle errors (e.g., show an error message)
+                console.error(error);
+            }
+        });
+    });
+});
+</script>
 {% endblock %}

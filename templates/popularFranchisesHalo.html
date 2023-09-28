@@ -14,6 +14,7 @@
             <th>Meta Score</th>
             <th>User Score</th>
             <th>GameRank Score</th>
+            <th>Favorite</th>
         </tr>
     </thead>
     <tbody id="tableBody">
@@ -26,9 +27,34 @@
             <td>{{ game.metascore }}</td>
             <td>{{ game.user_score }}</td>
             <td>{{ game.gamerank_score }}</td>
+            <td><button class="addToFavorites" data-game-id="{{ game.id }}">Add to Favorites</button></td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 
+<script>
+    $(document).ready(function() {
+        // Use event delegation to handle button clicks
+        $("#tableBody").on("click", ".addToFavorites", function() {
+            // Get the game ID from the data attribute
+            var gameId = $(this).data("game-id");
+    
+            // Send an AJAX request to add the game to favorites
+            $.ajax({
+                type: "POST", // You can use POST or another HTTP method
+                url: "/add_to_favorites", // Replace with your server route
+                data: { gameId: gameId },
+                success: function(response) {
+                    // Handle the server's response (e.g., show a success message)
+                    alert("Added to Favorites!");
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors (e.g., show an error message)
+                    console.error(error);
+                }
+            });
+        });
+    });
+</script>
 {% endblock %}

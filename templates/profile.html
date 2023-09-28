@@ -3,17 +3,17 @@
 {% block content %}
 
 
-<h1>{{ user.username }}</h1>
+<h1>Username: {{ user.username }}</h1>
 
-<h2>{{ user.bio }}</h2>
+<h4>Bio: {{ user.bio }}</h4>
 
 <!-- <h4>Favorite Platform: {{ user.favorite_platform }} || Favorite Decade: {{ user.favorite_decade }} || Favorite Genre: {{ user.favorite_genre }}</h4>
 <h4>Average Gamerank Score: {{ user.average_gamerank_score }} || Average Meta Score: {{ user.average_meta_score }} || Average User Score: {{ user.average_user_score }}</h4> -->
 
-<h5>Discord: <a href="{{ user.discord_link }}">{{ user.discord_link }}</a></h5>
-<h5>Nintendo: <a href="{{ user.nintendo_link }}">{{ user.nintendo_link }}</a></h5>
-<h5>PlayStation: <a href="{{ user.playstation_link }}">{{ user.playstation_link }}</a></h5>
-<h5>Steam: <a href="{{ user.steam_link }}">{{ user.steam_link }}</a></h5>
-<h5>Xbox: <a href="{{ user.xbox_link }}">{{ user.xbox_link }}</a></h5>
+<h5>Discord: {{ user.discord_link }}</h5>
+<h5>Nintendo: {{ user.nintendo_link }}</h5>
+<h5>PlayStation: {{ user.playstation_link }}</h5>
+<h5>Steam: {{ user.steam_link }}</h5>
+<h5>Xbox: {{ user.xbox_link }}</h5>
 
 {% endblock %}
