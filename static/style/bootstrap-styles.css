@@ -106,48 +106,82 @@ td {
   /* margin-top: 4rem; */
   margin-bottom: 1rem;
 }
-/* Since positioning the image, we need to help out the caption */
+
 .carousel-caption {
-  top: 8rem;
+  /* top: 8rem; */
+  /* bottom: 5rem; */
   z-index: 10;
   text-align: center;
 }
 
-#gameImage {
-  margin-top: 2rem;
-  margin-left: 2rem;
+ #gameImage {
+  /* margin-top: 2rem;
+  margin-left: 2rem;   */
   width: 10%;
+  margin-right: 2%;
+} 
+
+#imageAndTitle {
+  width: 100%;
+  margin-left: 14%;
+  margin-top: 25px;
+  margin-bottom: 35px;
+  /* margin-bottom: 15rem; */
 }
 
+#gameBio {
+  /* text-align: center; */
+  color: antiquewhite;
+  width: 75%;
+  margin-left: 14%;
+  overflow: hidden;
+  height: 125px;
+}
+
+/* #gameBioContainer {
+  vertical-align: middle;
+} */
+
 #GameRankScore {
-  font-size: 35px;
+  font-size: 30px;
   text-align: center;
+  color: antiquewhite;
+  font-weight: bold;
+  margin-bottom: -10px;
 }
 
 #GOYtitle {
   font-size: 50px;
-  text-align: center;
+  /* text-align: center; */
+  width: 65%;
+  /* margin-left: 2%; */
+  color: antiquewhite;
 }
 
 #otherScores {
   text-align: center;
+  font-size: 15px;
+  color: antiquewhite;
 }
 
+/* 
 #gameInfo {
   background-color: white;
   color: blueviolet;
-}
+} */
 
 .carousel-item {
-  height: 32rem;
+  height: 28rem;
 }
 
 #myCarousel {
-  background-color: blueviolet;
+  background-color: rgb(72, 72, 72);
+  border-radius: 10px;
 }
 
 #myCarousel2 {
-  background-color: blueviolet;
+  background-color: rgb(72, 72, 72);
+  border-radius: 10px;
 }
 
 #bestGOY1 {
@@ -172,6 +206,10 @@ td {
 
 #worstGOY3 {
   background-color: brown;
+}
+
+#compToolHeader {
+  margin-top: 5px;
 }
 
 #leftTable {
@@ -209,6 +247,7 @@ td {
   align-items: left;
   margin: 0 auto;
   padding: 0px;
+  width: 100%;
 }
 
 /* #comparisonToolSubHeader {
@@ -224,29 +263,120 @@ td {
   margin-bottom: 10px;
 } */
 
-.filter-box label {
+#filterLabel {
   font-weight: bold;
+  width: 33%;
+  font-size: 20px;
 }
 
-.filter-box select {
-  width: 100%;
-} 
+/* .filter-box select {
+  width: 50%;
+}  */
 
 #LTfilters {
-  display: block;
+  width: 50%;
+  margin-right: 2%;
+  /* margin-left: 1%; */
+  /* display: block; */
+  /* width: 35%; */
 }
 
 #RTfilters {
-  margin-left: 4%;
-  display: block;
+  width: 50%;
+  margin-left: 2%;
+  /* margin-right: 1%; */
+  /* margin-left: 30%; */
+  /* display: block; */
+  /* width: 35%; */
   /* text-align: center; */
 }
 
-label {
-  font-size: 20px;
+#LTdecadeFilter {
+  width: 65%;
 }
+
+#RTdecadeFilter {
+  width: 65%;
+}
+
+#LTplatformFilter {
+  width: 65%;
+}
+
+#RTplatformFilter {
+  width: 65%;
+}
+
+#LTgenreFilter {
+  width: 65%;
+}
+
+#RTgenreFilter {
+  width: 65%;
+}
+
+.row {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/* label {
+  font-size: 20px;
+} */
 
 .dropdown-menu {
   max-height: 200px;
   overflow-y: auto;
 }
+
+#LTsortGameRank {
+  background-color: blueviolet;
+  color: whitesmoke;
+  font-weight: bold;
+}
+
+#RTsortGameRank {
+  background-color: blueviolet;
+  color: whitesmoke;
+  font-weight: bold;
+}
+
+#LTsortMetaScore {
+  background-color: blueviolet;
+  color: whitesmoke;
+  font-weight: bold;
+}
+
+#RTsortMetaScore {
+  background-color: blueviolet;
+  color: whitesmoke;
+  font-weight: bold;
+}
+
+#LTsortUserScore {
+  background-color: blueviolet;
+  color: whitesmoke;
+  font-weight: bold;
+}
+
+#RTsortUserScore {
+  background-color: blueviolet;
+  color: whitesmoke;
+  font-weight: bold;
+}
+
+#LTsortGameRankScore {
+  background-color: blueviolet;
+  color: whitesmoke;
+  font-weight: bold;
+}
+
+#RTsortGameRankScore {
+  background-color: blueviolet;
+  color: whitesmoke;
+  font-weight: bold;
+}
+
+/* .container-fluid {
+  border: lime;
+} */

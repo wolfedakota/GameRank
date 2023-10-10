@@ -1,24 +1,62 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="signin-card">
+                <h1 class="signin-title">Sign In</h1>
+                <form id="signInForm" method="POST" action="/Login">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username:</label>
+                        <input type="text" id="username" name="username" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <p class="create-account-text">New user? Create an account <a class="create-account-link"href="/newProfile">here</a>.</p>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn">Sign In</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h1>Sign In</h1>
+<style>
+    .signin-card {
+        background-color: #f5f5f5;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        margin-bottom: 4rem;
+        margin-top: 3rem;
+    }
 
-<form id="signInForm" method="POST" action="/Login">
-    <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-    </div>
-    <div>
-        <a>New user? Create an account <a href="/newProfile">here.</a></a>
-    </div>
-    <div>
-        <button type="submit">Sign In</button>
-    </div>
-</form>
+    .signin-title {
+        font-size: 32px;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
+    .create-account-text {
+        font-size: 16px;
+        color: #333;
+    }
+
+    .create-account-link {
+        font-size: 16px;
+        color: blueviolet;
+    }
+
+    .btn {
+        background-color: blueviolet;
+        color: whitesmoke;
+    }
+</style>
 {% endblock %}

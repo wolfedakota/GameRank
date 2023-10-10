@@ -42,8 +42,8 @@ $(document).ready(function() {
 
         // Send an AJAX request to add the game to favorites
         $.ajax({
-            type: "POST", // You can use POST or another HTTP method
-            url: "/add_to_favorites", // Replace with your server route
+            type: "POST", 
+            url: "/add_to_favorites", 
             data: { gameId: gameId },
             success: function(response) {
                 // Handle the server's response (e.g., show a success message)

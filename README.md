@@ -1,0 +1,24 @@
+# GameRank
+# 10/10/23
+# Cary Dakota Wolfe
+
+Summary: 
+GameRank is an in-depth data analysis tool, using data scraped from the critic-review aggregation web application, Metacritic. The ultimate purpose of GameRank is to give users the freedom to find, and compare, any data they wish to find, in regards to any video game (within, roughly, the last 30 years). Though there are several other key factors, the three major points of data regarding each game listed in GameRank are Meta Score (Metacritic's aggregation of all critic-review scores), User Score (The average of all user reviews (Metacritic lists the reviews out of 10, however, GameRank displays User Score out of 100 for simplification of data comparison)), and GameRank Score (The average of the Meta Score and User Score). Though its calculation is quite simple, the GameRank Score is a significant piece of the GameRank app, and almost all of the databases in GameRank are sorted by this value. This provides a significantly different order of data from what is displayed in Metacritic's various databases. All games in the GameRank database are also assigned a GameRank, which is essentially their positioning in the complete games database, sorted by the GameRank score (The game with the highest value GameRank score has a GameRank of 1, the least value GameRank score a GameRank of 20507).
+
+Key Features: 
+Best and Worst games of the year (Located on the home page), Complete game database (A database of every game found on GameRank), GameRank's Best and Worst (databases corresponding to the games with the 100 highest, and lowest, GameRank Scores), Popular Platforms (databases which correspond to each platform, starting with the N64), Popular Franchises (6 databases corresponding to 6 of the most popular gaming franchises, with more likely to be implemented in the future), Comparison Tool (an in-depth data analysis tool which allows the user to compare two sets of data side-by-side. This tool include filters for genre, decade, and platform, and sorting buttons for GameRank, Meta, User, and GameRank Score. With this tool the user can compare several different pieces of data, such as: RPGs in the 90s vs the 2000s, Xbox 360 games vs PS3 games, platformers on the N64 vs the PlayStation, and much, much, more), Favorite games database (Displays a database of games favorited by the user).
+
+Additional Features: 
+Search bar (Returns a database of games which include the search term in the title), Profile creation (username, password, bio, Discord, Nintendo, PlayStation, Xbox), Log in / out, Edit profile.
+
+GameRank Database Layout: 
+Each row in the GameRank database includes the following columns from left to right: GameRank, Title, Release Date, Platform, Meta Score, User Score, GameRank Score, Favorite (Includes a button to add the corresponding game to the user's favorite games list (This column is not included in the Comparison Tool)).
+
+Desired Future Implentations: 
+Add sort buttons to all databases, and filter dropdowns to other specific databases (these only exist on the comparison tool for now). Add additional data to certain databases, such as: average Meta, User, and GameRank Score, favorite platform, genre, and decade (for favorite games database). A user lookup tool, which allows the user to search for other users and look at their profile and favorite games database. A comparison tool for the sum data of platforms and franchises (avg GameRank score of Xbox 360 vs PS3). Visual graphs for various databases (timeline of a franchise in chronological order, and its corresponding scores). Databases for each specific year, in addition to entire decades. Add additional franchises. Add links for every game and a dedicated page for each game.
+
+How the data is obtained: 
+GameRank obtained all video game data from Metacritic via a webscraping process using Python and Beautiful Soup. The webscraper goes through each of the relevant pieces of the site's HTML and extracts the necessary information. A small buffer of 10 requests per 15 seconds was placed to comply with rate limiting. The webscraper goes page-by-page through Metacritic's complete game database, until there are no pages left to navigate to. The webscraper took a lengthy amount of time to run, collecting data for 20507 games in about 8 hours, primarily due to the buffer (which is unavoidable, as Metacritic will block requests and cause the code to throw an error, if the buffer is not implemented). As the scraper collects the information, it is imported into a sql database. The necessary tables do not need to be created beforehand, as the webscraper will create them in a databse.sql file when the code is executed. 
+
+Tech Used:
+Flask, Jinja, AJAX, SQLAlchemy, SQLite, BeautifulSoup, Bootstrap, Python, JavaScript, CSS, HTML.

@@ -1,71 +1,101 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="profile-editor-card">
+                <h1 class="profile-editor-title">Profile Editor</h1>
+                <div class="dropdown-divider"></div>
+                <form id="editUserForm">
+                    <div class="mb-3">
+                        <label for="editUsername" class="form-label">Username:</label>
+                        <input type="text" id="editUsername" name="editUsername" class="form-control" value="{{ user.username }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editBio" class="form-label">Bio:</label>
+                        <input type="text" id="editBio" name="editBio" class="form-control" value="{{ user.bio }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editDiscord" class="form-label">Discord:</label>
+                        <input type="text" id="editDiscord" name="editDiscord" class="form-control" value="{{ user.discord_link }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editNintendo" class="form-label">Nintendo:</label>
+                        <input type="text" id="editNintendo" name="editNintendo" class="form-control" value="{{ user.nintendo_link }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editPlayStation" class="form-label">PlayStation:</label>
+                        <input type="text" id="editPlayStation" name="editPlayStation" class="form-control" value="{{ user.playstation_link }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editSteam" class="form-label">Steam:</label>
+                        <input type="text" id="editSteam" name="editSteam" class="form-control" value="{{ user.steam_link }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editXbox" class="form-label">Xbox:</label>
+                        <input type="text" id="editXbox" name="editXbox" class="form-control" value="{{ user.xbox_link }}">
+                    </div>
+                    <div>
+                        <button type="submit" class="btn">Submit Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h1>Profile Editor</h1>
+<style>
+    .profile-editor-card {
+        background-color: #f5f5f5;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        margin-bottom: 1rem;
+    }
 
-<form id="editUserForm">
-    <div>
-        <label for="editUsername">Username:</label>
-        <input type="text" id="editUsername" name="editUsername" value="{{ user.username }}">
-    </div>
-    <div>
-        <label for="editBio">Bio:</label>
-        <input type="text" id="editBio" name="editBio" value="{{ user.bio }}">
-    </div>
-    <div>
-        <label for="editDicord">Discord:</label>
-        <input type="text" id="editDiscord" name="editDiscord" value="{{ user.discord_link }}">
-    </div>
-    <div>
-        <label for="editNintendo">Nintendo:</label>
-        <input type="text" id="editNintendo" name="editNintendo" value="{{ user.nintendo_link }}">
-    </div>
-    <div>
-        <label for="editPlayStation">PlayStation:</label>
-        <input type="text" id="editPlayStation" name="editPlayStation" value="{{ user.playstation_link }}">
-    </div>
-    <div>
-        <label for="editSteam">Steam:</label>
-        <input type="text" id="editSteam" name="editSteam" value="{{ user.steam_link }}">
-    </div>
-    <div>
-        <label for="editXbox">Xbox:</label>
-        <input type="text" id="editXbox" name="editXbox" value="{{ user.xbox_link }}">
-    </div>
-    <div>
-        <button type="submit">Submit Changes</button>
-    </div>
-</form>
+    .profile-editor-title {
+        font-size: 24px;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        background-color: blueviolet;
+        color: whitesmoke;
+    }
+</style>
+
 <script>
-$(document).ready(function() {
-    $("#editUserForm").submit(function(e) {
-        e.preventDefault();
+    $(document).ready(function() {
+        $("#editUserForm").submit(function(e) {
+            e.preventDefault();
 
-        var editedData = {
-            editUsername: $("#editUsername").val(),
-            editBio: $("#editBio").val(),
-            editDiscord: $("#editDiscord").val(),
-            editNintendo: $("#editNintendo").val(),
-            editSteam: $("#editSteam").val(),
-            editPlayStation: $("#editPlayStation").val(),
-            editXbox: $("#editXbox").val(),
-        };
+            var editedData = {
+                editUsername: $("#editUsername").val(),
+                editBio: $("#editBio").val(),
+                editDiscord: $("#editDiscord").val(),
+                editNintendo: $("#editNintendo").val(),
+                editSteam: $("#editSteam").val(),
+                editPlayStation: $("#editPlayStation").val(),
+                editXbox: $("#editXbox").val(),
+            };
 
-        $.ajax({
-            type: "POST",  // You can use POST or another HTTP method
-            url: "/updateProfile",  // Replace with your server route for updating the profile
-            data: editedData,
-            success: function(response) {
-                // Handle the server's response (e.g., show a success message)
-                alert("Profile updated successfully!");
-            },
-            error: function(xhr, status, error) {
-                // Handle errors (e.g., show an error message)
-                console.error(error);
-            }
+            $.ajax({
+                type: "POST",
+                url: "/updateProfile",
+                data: editedData,
+                success: function(response) {
+                    // Handle the server's response (e.g., show a success message)
+                    alert("Profile updated successfully!");
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors (e.g., show an error message)
+                    console.error(error);
+                }
+            });
         });
     });
-});
 </script>
 {% endblock %}

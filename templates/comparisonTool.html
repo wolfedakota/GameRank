@@ -2,8 +2,9 @@
 
 {% block content %}
 
-<h1>GameRank Comparison Tool</h1>
-
+<div id="compToolHeader">
+    <h1>GameRank Comparison Tool</h1>
+</div>
 <!-- <div id="comparisonToolSubHeaders">
     <h5 id="comparisonToolSubHeader">Use the tables below to compare two sets of data.</h5>
     <h6 id="comparisonToolSubHeader">For example: Best PlayStation games by GameRank score vs best Xbox games by GameRank score.</h6>
@@ -12,50 +13,62 @@
 
 <div id="filters">
     <div id="LTfilters">
-        <label for="LTdecadeFilter">Filter by Decade:</label>
+        <div class="row">
+        <label id="filterLabel" for="LTdecadeFilter">Filter by Decade:</label>
         <select id="LTdecadeFilter">
             <option value="All">All</option>
             {% for decade in gameDecades %}
                 <option value="{{ decade.name }}">{{ decade.name }}</option>
             {% endfor %}
         </select>
-        <label for="LTplatformFilter">Filter by Platform:</label>
+        </div>
+        <div class="row">
+        <label id="filterLabel" for="LTplatformFilter">Filter by Platform:</label>
         <select id="LTplatformFilter">
             <option value="All">All</option>
             {% for platform in gamePlatforms %}
                 <option value="{{ platform.name }}">{{ platform.name }}</option>
             {% endfor %}
         </select>
-        <label for="LTgenreFilter">Filter by Genre:</label>
+        </div>
+        <div class="row">
+        <label  id="filterLabel" for="LTgenreFilter">Filter by Genre:</label>
         <select id="LTgenreFilter">
             <option value="All">All</option>
             {% for genre in gameGenres %}
                 <option value="{{ genre.name }}">{{ genre.name }}</option>
             {% endfor %}
         </select>
+        </div>
     </div>
     <div id="RTfilters">
-        <label for="RTdecadeFilter">Filter by Decade:</label>
+        <div class="row">
+        <label id="filterLabel" for="RTdecadeFilter">Filter by Decade:</label>
         <select id="RTdecadeFilter">
             <option value="All">All</option>
             {% for decade in gameDecades %}
                 <option value="{{ decade.name }}">{{ decade.name }}</option>
             {% endfor %}
         </select>
-        <label for="RTplatformFilter">Filter by Platform:</label>
+        </div>
+        <div class="row">
+        <label id="filterLabel" for="RTplatformFilter">Filter by Platform:</label>
         <select id="RTplatformFilter">
             <option value="All">All</option>
             {% for platform in gamePlatforms %}
                 <option value="{{ platform.name }}">{{ platform.name }}</option>
             {% endfor %}
         </select>
-        <label for="RTgenreFilter">Filter by Genre:</label>
+        </div>
+        <div class="row">
+        <label id="filterLabel" for="RTgenreFilter">Filter by Genre:</label>
         <select id="RTgenreFilter">
             <option value="All">All</option>
             {% for genre in gameGenres %}
                 <option value="{{ genre.name }}">{{ genre.name }}</option>
             {% endfor %}
         </select>
+        </div>
     </div>
 </div>
 

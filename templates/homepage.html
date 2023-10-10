@@ -18,14 +18,36 @@
   <div class="carousel-inner">
     {% for top_game in top_games %}
     <div class="carousel-item {% if loop.first %}active{% endif %}">
-      <img id="gameImage" src="{{ top_game.game_image }}" alt="{{ top_game.game_title }}" class="img-fluid">
-      <div class="container">
-        <div class="carousel-caption text-start">
-          <h1 id="GOYtitle">{{ top_game.game_title }}</h1>
-          <p id="GameRankScore" class="opacity-75">|| GameRank Score: {{ top_game.gamerank_score }} ||</p>
-          <p id="otherScores" class="opacity-75">|| Meta Score: {{ top_game.metascore }} || User Score: {{ top_game.user_score }} ||</p>
-          <!-- <p class="opacity-75">User Score: {{ top_game.user_score }}</p> -->
-          <p><a id="gameInfo" class="btn btn-lg" href="#">Game Info</a></p>
+      <div id="imageAndTitle" class="row">
+        <!-- <div class="col-3"> -->
+        <img id="gameImage" src="{{ top_game.game_image }}" alt="{{ top_game.game_title }}" class="img-fluid">
+        <h1 id="GOYtitle">
+          {% set game_title = top_game.game_title %}
+          {% if game_title|length > 45 %} 
+              {{ game_title[:45] }}...
+          {% else %}
+              {{ game_title }}
+          {% endif %}
+        </h1>
+      </div>
+      <!-- <div class="carousel-caption text-start"> -->
+      <div class="row">
+        <!-- </div> -->
+        <div id="gameBioContainer" class="container">
+          <p id="gameBio">
+            {% set game_bio = top_game.game_bio %}
+            {% if game_bio|length > 600 %} 
+                {{ game_bio[:600] }}...
+            {% else %}
+                {{ game_bio }}
+            {% endif %}
+          </p>
+        </div>
+        <div class="row">
+          <p id="GameRankScore" class="opacity-75">GameRank Score: {{ top_game.gamerank_score }}</p>
+        </div>
+        <div class="row">
+          <p id="otherScores" class="opacity-75">Meta Score: {{ top_game.metascore }}   User Score: {{ top_game.user_score }}</p>
         </div>
       </div>
     </div>
@@ -57,14 +79,34 @@
   <div class="carousel-inner">
     {% for bottom_game in bottom_games %}
     <div class="carousel-item {% if loop.first %}active{% endif %}">
-      <img id="gameImage" src="{{ bottom_game.game_image }}" alt="{{ bottom_game.game_title }}" class="img-fluid">
-      <div class="container">
-        <div class="carousel-caption text-start">
-          <h1 id="GOYtitle">{{ bottom_game.game_title }}</h1>
-          <p id="GameRankScore" class="opacity-75">|| GameRank Score: {{ bottom_game.gamerank_score }} ||</p>
-          <p id="otherScores" class="opacity-75">|| Meta Score: {{ bottom_game.metascore }} || User Score: {{ bottom_game.user_score }} ||</p>
-          <!-- <p class="opacity-75">User Score: {{ bottom_game.user_score }}</p> -->
-          <p><a id="gameInfo" class="btn btn-lg" href="#">Game Info</a></p>
+      <div id="imageAndTitle" class="row">
+        <img id="gameImage" src="{{ bottom_game.game_image }}" alt="{{ bottom_game.game_title }}" class="img-fluid">
+        <h1 id="GOYtitle">
+          {% set game_title = bottom_game.game_title %}
+          {% if game_title|length > 30 %} 
+              {{ game_title[:30] }}...
+          {% else %}
+              {{ game_title }}
+          {% endif %}
+        </h1>
+      </div>
+      <div class="row">
+        <!-- </div> -->
+        <div id="gameBioContainer" class="container">
+          <p id="gameBio">
+            {% set game_bio = bottom_game.game_bio %}
+            {% if game_bio|length > 600 %} 
+                {{ game_bio[:600] }}...
+            {% else %}
+                {{ game_bio }}
+            {% endif %}
+          </p>
+        </div>
+        <div class="row">
+          <p id="GameRankScore" class="opacity-75">GameRank Score: {{ bottom_game.gamerank_score }}</p>
+        </div>
+        <div class="row">
+          <p id="otherScores" class="opacity-75">Meta Score: {{ bottom_game.metascore }}   User Score: {{ bottom_game.user_score }}</p>
         </div>
       </div>
     </div>

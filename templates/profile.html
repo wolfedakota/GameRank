@@ -1,19 +1,66 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container">
+    <div class="row">
+        <div>
+            <div class="profile-card">
+                <h1 class="profile-username">{{ user.username }}</h1>
+                <h4 class="profile-bio">{{ user.bio }}</h4>
+                <div class="dropdown-divider"></div>
+                <div class="profile-links">
+                    <h5 class="profile-link">Discord: {{ user.discord_link }}</h5>
+                    <h5 class="profile-link">Nintendo: {{ user.nintendo_link }}</h5>
+                    <h5 class="profile-link">PlayStation: {{ user.playstation_link }}</h5>
+                    <h5 class="profile-link">Steam: {{ user.steam_link }}</h5>
+                    <h5 class="profile-link">Xbox: {{ user.xbox_link }}</h5>
+                    <h5 class="profile-link">
+                        <a>{{ user.username }}'s <a id="favGamesLink" href="/FavoriteGames" target="_blank">favorite games</a></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<style>
+    .profile-card {
+        background-color: #f5f5f5;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        margin-bottom: 3rem;
+        margin-top: 2rem;
+    }
 
-<h1>Username: {{ user.username }}</h1>
+    .profile-username {
+        font-size: 42px;
+        color: #333;
+    }
 
-<h4>Bio: {{ user.bio }}</h4>
+    .profile-bio {
+        font-size: 20px;
+        color: #555;
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
 
-<!-- <h4>Favorite Platform: {{ user.favorite_platform }} || Favorite Decade: {{ user.favorite_decade }} || Favorite Genre: {{ user.favorite_genre }}</h4>
-<h4>Average Gamerank Score: {{ user.average_gamerank_score }} || Average Meta Score: {{ user.average_meta_score }} || Average User Score: {{ user.average_user_score }}</h4> -->
+    .profile-links {
+        margin-top: 30px;
+    }
 
-<h5>Discord: {{ user.discord_link }}</h5>
-<h5>Nintendo: {{ user.nintendo_link }}</h5>
-<h5>PlayStation: {{ user.playstation_link }}</h5>
-<h5>Steam: {{ user.steam_link }}</h5>
-<h5>Xbox: {{ user.xbox_link }}</h5>
+    .profile-link {
+        font-size: 20px;
+        /* color: #007bff; */
+        margin: 15px 0;
+    }
 
+    .profile-link i {
+        margin-right: 5px;
+    }
+
+    #favGamesLink {
+        color: blueviolet
+    }
+
+</style>
 {% endblock %}

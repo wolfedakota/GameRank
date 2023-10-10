@@ -27,14 +27,14 @@
 
   <!-- Static navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark">
-
+    <!-- GameRank Logo in navbar -->
     <a id="GameRank-logo" class="navbar-brand" href="/">GameRank</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
+        <!-- Search bar in navbar -->
         <form class="d-flex" method="POST" action="/SearchResults">
           <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search" name="navSearchBar" id="navSearchBar">
           <button class="btn search-button" type="submit"><i class="bi bi-search"></i></button>
@@ -42,6 +42,7 @@
       </ul>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item dropdown">
+          <!-- Dropdown for GameRank data tables -->
           <a class="nav-link dropdown-toggle" href="#" id="tableDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">GameRank Data</a>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="tableDropdown">
               <a class="dropdown-item" href="/completeDatabase">Complete Database</a>
@@ -50,6 +51,7 @@
           </div>
         </li>
         <li class="nav-item dropdown">
+          <!-- dropdown for popular platforms -->
           <a class="nav-link dropdown-toggle" href="#" id="platformDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Popular Platforms</a>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="platformDropdown">
               <a class="dropdown-item" href="/3DS">3DS</a>
@@ -77,6 +79,7 @@
           </div>
         </li>
         <li class="nav-item dropdown">
+          <!-- dropdown for popular platforms -->
           <a class="nav-link dropdown-toggle" href="#" id="franchiseDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Popular Franchises</a>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="franchiseDropdown">
             <a class="dropdown-item" href="/CallOfDuty">Call of Duty</a>
@@ -88,21 +91,20 @@
           </div>
         </li>
         <li class="nav-item">
+          <!-- link to comparison tool -->
           <a class="nav-link" href="/ComparisonTool">Comparison Tool</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="/Profile">Profile</a>
-        </li> -->
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
-          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-            <a class="dropdown-item" href="/Profile">Profile</a>
-            <a class="dropdown-item" href="/FavoriteGames">Favorite Games</a>
-            <a class="dropdown-item" href="/EditProfile">Edit Profile</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/Login" id="login-button">Log In</a>
-            <a class="dropdown-item" href="/LogOut" id="logout-button">Log Out</a>
-          </div>
+        <li class="nav-item dropdown">
+          <!-- dropdown for profile info -->
+          <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+              <a class="dropdown-item" href="/Profile">Profile</a>
+              <a class="dropdown-item" href="/FavoriteGames">Favorite Games</a>
+              <a class="dropdown-item" href="/EditProfile">Edit Profile</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/Login" id="login-button">Sign In</a>
+              <a class="dropdown-item" href="/LogOut" id="logout-button">Sign Out</a>
+            </div>
         </li>
       </ul>
     </div>
